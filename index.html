@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fff6f0;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding: 30px;
+      color: #444;
+    }
+
+    h1 {
+      color: #e26d5c;
+      font-size: 32px;
+    }
+
+    .contador {
+      font-size: 20px;
+      margin: 20px 5px;
+    }
+
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .carousel img {
+      width: 300px;
+      border-radius: 14px;
+      box-shadow: 0 0 15px #ccc;
+      transition: opacity 1s ease;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Feliz dia dos namorados ❤️</h1>
+
+  <div class="contador" id="tempoFormatado"></div>
+  <div class="contador" id="tempoTotal"></div>
+
+  <p>Eu vou te amar para todo sempre ❤️</p>
+
+  <div class="carousel">
+    <img id="fotoAtual" src="foto1.JPG" alt="Foto atual">
+  </div>
+
+  <!-- Música de fundo -->
+  <audio autoplay loop id="musicaFundo">
+    <source src="medo_bobo.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const inicio = new Date("2016-06-03T00:00:00");
+
+    function atualizarContador() {
+      const agora = new Date();
+
+      // Anos e meses
+      let anos = agora.getFullYear() - inicio.getFullYear();
+      let meses = agora.getMonth() - inicio.getMonth();
+      if (agora.getDate() < inicio.getDate()) {
+        meses--;
+      }
+      if (meses < 0) {
+        anos--;
+        meses += 12;
+      }
+
+      document.getElementById("tempoFormatado").textContent =
+        `Estamos juntos há ${anos} ano(s) e ${meses} mês(es) ❤️`;
+
+      // Dias e horas totais
+      const diffMs = agora - inicio;
+      const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const horas = agora.getHours();
+      const minutos = agora.getMinutes();
+
+      document.getElementById("tempoTotal").textContent =
+        `Total de ${dias} dia(s), ${horas} hora(s) e ${minutos} minuto(s)`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    // Carrossel automático
+    const fotos = [
+      "foto1.JPG", "foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg",
+      "foto6.jpg", "foto7.jpg", "foto8.JPG", "foto9.jpg", "foto10.jpg"
+    ];
+
+    let indice = 0;
+    const img = document.getElementById("fotoAtual");
+
+    function trocarFoto() {
+      indice = (indice + 1) % fotos.length;
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = fotos[indice];
+        img.style.opacity = 1;
+      }, 500);
+    }
+
+    setInterval(trocarFoto, 4000); // troca a cada 4 segundos
+
+    // Música de fundo volume baixo
+    const musica = document.getElementById("musicaFundo");
+    musica.volume = 0.25;
+  </script>
+</body>
+</html>
