@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Nosso Amor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -31,10 +32,22 @@
     }
 
     .carousel img {
-      width: 300px;
+      max-width: 90%;
+      height: auto;
       border-radius: 14px;
       box-shadow: 0 0 15px #ccc;
       transition: opacity 1s ease;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #e26d5c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
     }
 
     audio {
@@ -54,8 +67,11 @@
     <img id="fotoAtual" src="foto1.JPG" alt="Foto atual">
   </div>
 
+  <!-- Botão de play -->
+  <button onclick="tocarMusica()">▶️ Tocar Música</button>
+
   <!-- Música de fundo -->
-  <audio autoplay loop id="musicaFundo">
+  <audio id="musicaFundo" loop>
     <source src="medo_bobo.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
@@ -111,11 +127,14 @@
       }, 500);
     }
 
-    setInterval(trocarFoto, 4000); // troca a cada 4 segundos
+    setInterval(trocarFoto, 4000);
 
-    // Música de fundo volume baixo
-    const musica = document.getElementById("musicaFundo");
-    musica.volume = 0.25;
+    // Função para tocar música manualmente
+    function tocarMusica() {
+      const musica = document.getElementById("musicaFundo");
+      musica.volume = 0.25;
+      musica.play();
+    }
   </script>
 </body>
 </html>
